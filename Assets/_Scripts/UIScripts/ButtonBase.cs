@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtonBase : MonoBehaviour
+public abstract class ButtonBase : MonoBehaviour
 {
     public Button _button;
-    
-    private void Start() {
+
+    private void Awake() {
         _button = GetComponent<Button>();
 
         _button.onClick.AddListener( ()=>{
@@ -13,7 +13,12 @@ public class ButtonBase : MonoBehaviour
         });
     }
 
+
+    public Button GetButtonComponent(){
+        return GetComponent<Button>();
+    }
+
     public virtual void ButtonEventCalling(){
-        Debug.Log(_button.name);
+        Debug.Log(_button.name + "clicked!");
     }
 }

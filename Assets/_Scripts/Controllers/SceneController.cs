@@ -4,10 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : Singleton<SceneController>
 {
-    public void LoadLevel(string levelName)
-    {
-        SceneManager.LoadSceneAsync(levelName, LoadSceneMode.Single);
-    }
 
     public void UnloadLevel(string levelName)
     {
@@ -27,7 +23,7 @@ public class SceneController : Singleton<SceneController>
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(levelName, LoadSceneMode.Single);
         //Don't let the Scene activate until you allow it to
         asyncOperation.allowSceneActivation = false;
-        Debug.Log("Pro :" + asyncOperation.progress);
+        Debug.Log("Processing :" + asyncOperation.progress);
         //When the load is still in progress, output the Text and progress bar
         while (!asyncOperation.isDone)
         {

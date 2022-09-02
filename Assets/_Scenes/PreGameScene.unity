@@ -2762,3 +2762,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   promptBox: {fileID: 683044876}
+  inputEvenNumber: {fileID: 559911826}
+  inputAnotherNumber: {fileID: 1306656900}
