@@ -20,10 +20,9 @@ public class GameManager : Singleton<GameManager>
                 
                 break;
             case GameState.GAME:
-                
-                
                 break;
             case GameState.POSTGAME:
+
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
@@ -39,5 +38,6 @@ public class GameManager : Singleton<GameManager>
 public enum GameState {
     PREGAME = 0,
     GAME = 1,
-    POSTGAME = 2    
+    POSTGAME = 2,
+        
 }
