@@ -11,15 +11,13 @@ public class GameManager : Singleton<GameManager>
     // Kick the game off with the first state
     void Start() => ChangeState(GameState.PREGAME);
 
-    public void ChangeState(GameState newState)
-    {
+    public void ChangeState(GameState newState) {
         OnBeforeStateChanged?.Invoke(newState);
 
         State = newState;
-        switch (newState)
-        {
+        switch (newState) {
             case GameState.PREGAME:
-
+                
                 break;
             case GameState.GAME:
                 break;
@@ -31,16 +29,15 @@ public class GameManager : Singleton<GameManager>
         }
 
         OnAfterStateChanged?.Invoke(newState);
-
+        
         Debug.Log($"New state: {newState}");
     }
 }
 
 [Serializable]
-public enum GameState
-{
+public enum GameState {
     PREGAME = 0,
     GAME = 1,
     POSTGAME = 2,
-
+        
 }
