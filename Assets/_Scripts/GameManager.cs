@@ -1,4 +1,3 @@
-
 ﻿using System;
 using UnityEngine;
 
@@ -17,8 +16,7 @@ public class GameManager : Singleton<GameManager>
 
         State = newState;
         switch (newState) {
-            case GameState.PREGAME:
-                
+            case GameState.PREGAME:                
                 break;
             case GameState.GAME:
                 break;
@@ -33,6 +31,9 @@ public class GameManager : Singleton<GameManager>
         
         Debug.Log($"New state: {newState}");
     }
+
+
+
 }
 
 [Serializable]
