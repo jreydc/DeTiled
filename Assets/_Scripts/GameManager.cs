@@ -9,7 +9,7 @@ public class GameManager : Singleton<GameManager>
     public GameState State { get; private set; }
 
     // Kick the game off with the first state
-    void Start() => ChangeState(GameState.STARTING);
+    void Start() => ChangeState(GameState.PREGAME);
 
     public void ChangeState(GameState newState) {
         OnBeforeStateChanged?.Invoke(newState);
@@ -17,11 +17,11 @@ public class GameManager : Singleton<GameManager>
         State = newState;
         switch (newState) {
             case GameState.PREGAME:
-                HandleStarting();
+                
                 break;
             case GameState.GAME:
-                HandleSpawningHeroes();
-                HandleSpawningEnemies();
+                
+                
                 break;
             case GameState.POSTGAME:
                 break;
