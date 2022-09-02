@@ -1226,6 +1226,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 559911824}
   m_CullTransparentMesh: 0
+--- !u!1 &648043931
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 648043932}
+  - component: {fileID: 648043933}
+  m_Layer: 0
+  m_Name: SceneController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &648043932
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 648043931}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 231.5, y: 382.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &648043933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 648043931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9384ba3c522b4d044ae367754aebe73d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &683044876
 GameObject:
   m_ObjectHideFlags: 0
@@ -1313,6 +1356,7 @@ GameObject:
   - component: {fileID: 1017625318}
   - component: {fileID: 1017625317}
   - component: {fileID: 1017625316}
+  - component: {fileID: 1017625319}
   m_Layer: 5
   m_Name: StartButton
   m_TagString: Untagged
@@ -1420,6 +1464,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1017625314}
   m_CullTransparentMesh: 0
+--- !u!114 &1017625319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017625314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee08ddb018d4c114da4d434201d95e3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 0}
 --- !u!1 &1030555245
 GameObject:
   m_ObjectHideFlags: 0
@@ -2704,6 +2761,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2ff4e1c66325f14093fc33ff21a0bd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playButton: {fileID: 2091799437}
-  startButton: {fileID: 1017625316}
   promptBox: {fileID: 683044876}
