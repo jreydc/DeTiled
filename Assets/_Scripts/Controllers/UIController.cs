@@ -16,20 +16,6 @@ public class UIController : MonoBehaviour
 
     [SerializeField]private GameObject promptBox;
      
-    void Start()
-    {
-        /* playButton = GetButtonComponent();
-        startButton = GetButtonComponent();
-
-        playButton.onClick.AddListener(()=>{
-            promptBox.SetActive(true);
-        });
-
-        startButton.onClick.AddListener(()=>{
-            StartCoroutine(SceneController._Instance.LoadingDetails());
-            SceneController._Instance.LoadLevel("GamePlayScene");
-        }); */
-    }
 
     public void PromptBoxVisibility(bool isVisible){
         promptBox.SetActive(isVisible);

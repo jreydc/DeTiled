@@ -7,7 +7,8 @@ public class StartButtonScript : ButtonBase
     public override void ButtonEventCalling()
     {
         base.ButtonEventCalling();
-        StartCoroutine(SceneController._Instance.LoadingDetails());
-        SceneController._Instance.LoadLevel("GamePlayScene");
+        //SceneController._Instance.LoadLevel("MainGameScene");
+        StartCoroutine(SceneController._Instance.LoadLevelDetails("MainGameScene"));
+        //SceneController._Instance.UnloadLevel(SceneController._Instance.GetCurrentScene().ToString());
     }
 }

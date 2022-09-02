@@ -11,19 +11,20 @@ public class SceneController : Singleton<SceneController>
 
     public void UnloadLevel(string levelName)
     {
-        SceneManager.UnloadSceneAsync(levelName, UnloadSceneOptions.None);
+        SceneManager.UnloadSceneAsync(levelName, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
     }
 
+    public Scene GetCurrentScene(){
+        return SceneManager.GetActiveScene();
+    }
     /* 
-        Reference: https://gamedevbeginner.com/how-to-load-a-new-scene-in-unity-with-a-loading-screen/
-
-        By: John French - May 14, 2020
-     */
-    public IEnumerator LoadingDetails(){
+        Reference: https://gamedevbeginner.com/how-to-load-a-new-scene-in-unity-with-a-loading-screen/ By: John French - May 14, 2020
+    */
+    public IEnumerator LoadLevelDetails(string levelName){
         yield return null;
 
         //Begin to load the Scene you specify
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("MainScene");
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(levelName, LoadSceneMode.Single);
         //Don't let the Scene activate until you allow it to
         asyncOperation.allowSceneActivation = false;
         Debug.Log("Pro :" + asyncOperation.progress);
