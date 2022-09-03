@@ -1,11 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public sealed class Tile: MonoBehaviour
+public sealed class Tile: ButtonBase
 {
     public int x;
     public int y;
-    public Button _button;
     public Image icon;
     private Color _color;
     
@@ -20,4 +19,9 @@ public sealed class Tile: MonoBehaviour
         }
     }
 
+    public override void ButtonEventCalling()
+    {
+        base.ButtonEventCalling();
+        TileSelection._Instance.SelectingTiles(this);
+    }
 }
