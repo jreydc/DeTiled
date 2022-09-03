@@ -17,34 +17,32 @@ public class GridManager : MonoBehaviour
     private void Start() {      
         rows = new Row[dimension];
         
-        //Tiles = new Tile[rows.Max(row => row._tiles.Length), rows.Length]; 
+        Tiles = new Tile[rows.Max(row => row._tiles.Length), rows.Length]; 
         for(int x = 0; x < dimension; x++){
-            //columns = transform.GetChild(0).GetComponent<Row>();
+            
             rows[x] = Instantiate(columns, transform.position, Quaternion.identity);
             rows[x].transform.SetParent(transform);
             rows[x].transform.localScale = Vector3.one;
+            
             rows[x]._tiles = new Tile[dimension];
             for(int y = 0; y < columns._tiles.Length; y++){
                 rows[x]._tiles[y] = Instantiate(tile, rows[x].transform.position, Quaternion.identity);
                 rows[x]._tiles[y].transform.SetParent(rows[x].transform);
                 rows[x]._tiles[y].transform.localScale = Vector3.one;
                 rows[x]._tiles[y].name = $"Tile {x}{y}";
+                rows[x]._tiles[y].x = x;
+                rows[x]._tiles[y].y = y;
+
+                rows[x]._tiles[y].ColorChange = new Color(
+                    Random.Range(0f, colorNumber), 
+                    Random.Range(0f, colorNumber), 
+                    Random.Range(0f, colorNumber)
+                );
+
+                
+                Tiles[x, y] = tile;
             }
         }
-
-
-        /* for(int y = 0; y < dimension; y++){
-            for (int x = 0; x < dimension; x++){
-                var spawnedTile = Instantiate(TileInstantiator.TileInstance) as Tile;
-
-                rows[y]._tiles[x] = spawnedTile;
-                
-                Tiles[x, y] = spawnedTile;
-
-                //tileObject.transform.localPosition = tile.transform.localPosition;
-                spawnedTile.ColorChange = Random.ColorHSV(colorNumber, colorNumber);
-            }
-        } */
     }
 }
 
