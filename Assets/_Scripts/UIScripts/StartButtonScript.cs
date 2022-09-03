@@ -9,6 +9,5 @@ public class StartButtonScript : ButtonBase
         PlayerPrefs.SetInt("Even", UIController._Instance.GetEvenNumberInput());
         PlayerPrefs.SetInt("Another", UIController._Instance.GetAnotherNumberInput());
         Debug.Log(UIController._Instance.GetAnotherNumberInput()+ " - " +UIController._Instance.GetEvenNumberInput());
-        
     }
 }
