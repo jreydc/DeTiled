@@ -13,11 +13,6 @@ public abstract class ButtonBase : MonoBehaviour
         });
     }
 
-
-    public Button GetButtonComponent(){
-        return GetComponent<Button>();
-    }
-
     public virtual void ButtonEventCalling(){
         Debug.Log(_button.name + "clicked!");
     }
