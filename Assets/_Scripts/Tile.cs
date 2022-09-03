@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public sealed class Tile: MonoBehaviour
 {
-    [SerializeField]private GameObject highlight;
     public int x;
     public int y;
     public Button _button;
@@ -21,11 +20,4 @@ public sealed class Tile: MonoBehaviour
         }
     }
 
-    private void OnMouseEnter() {
-         highlight.SetActive(true);
-    }
-
-    private void OnMouseExit() {
-        highlight.SetActive(false);
-    }
 }
