@@ -28,7 +28,8 @@ public class GridManager : MonoBehaviour
             rows[x].transform.localScale = Vector3.one;
             
             rows[x]._tiles = new Tile[dimension];
-            for(int y = 0; y < columns._tiles.Length; y++){
+
+            for(int y = 0; y < rows[x]._tiles.Length; y++){
                 rows[x]._tiles[y] = Instantiate(tile, rows[x].transform.position, Quaternion.identity);
                 rows[x]._tiles[y].transform.SetParent(rows[x].transform);
                 rows[x]._tiles[y].transform.localScale = Vector3.one;
