@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8ac7dd2fc582e945bf22a466a38c879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  highlight: {fileID: 0}
   x: 0
   y: 0
   _button: {fileID: 6602584421981050695}

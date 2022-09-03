@@ -18,13 +18,17 @@ public class GridManager : MonoBehaviour
         rows = new Row[dimension];
         
         //Tiles = new Tile[rows.Max(row => row._tiles.Length), rows.Length]; 
-        for(int x = 0; x < rows.Length; x++){
+        for(int x = 0; x < dimension; x++){
             //columns = transform.GetChild(0).GetComponent<Row>();
-            columns = Instantiate(TileInstantiator.RowInstance) as Row;
-            columns._tiles = new Tile[dimension];
+            rows[x] = Instantiate(columns, transform.position, Quaternion.identity);
+            rows[x].transform.SetParent(transform);
+            rows[x].transform.localScale = Vector3.one;
+            rows[x]._tiles = new Tile[dimension];
             for(int y = 0; y < columns._tiles.Length; y++){
-                var spawnedTile = Instantiate(TileInstantiator.TileInstance, new Vector3(x, y), Quaternion.identity) as Tile;
-                spawnedTile.name = $"Tile {x}{y}";
+                rows[x]._tiles[y] = Instantiate(tile, rows[x].transform.position, Quaternion.identity);
+                rows[x]._tiles[y].transform.SetParent(rows[x].transform);
+                rows[x]._tiles[y].transform.localScale = Vector3.one;
+                rows[x]._tiles[y].name = $"Tile {x}{y}";
             }
         }
 
