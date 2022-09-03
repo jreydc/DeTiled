@@ -2,22 +2,25 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GridManager : MonoBehaviour
 {
     public int dimension => PlayerPrefs.GetInt("Even");
     public int colorNumber => PlayerPrefs.GetInt("Another");
+    public Row[] rows; 
     public Tile tile;
     public Row columns;
-    public Row[] rows;
-    
     public Tile[,] Tiles{get; private set;}
 
+    private readonly List<Tile> _selection = new List<Tile>();
     private void Start() {      
+        GridGeneration();
+    }
+
+    private void GridGeneration(){
         rows = new Row[dimension];
-        
-        Tiles = new Tile[rows.Max(row => row._tiles.Length), rows.Length]; 
+
+        //Tiles = new Tile[rows.Max(row => row._tiles.Length), rows.Length]; 
         for(int x = 0; x < dimension; x++){
             
             rows[x] = Instantiate(columns, transform.position, Quaternion.identity);
@@ -40,7 +43,7 @@ public class GridManager : MonoBehaviour
                 );
 
                 
-                Tiles[x, y] = tile;
+                //Tiles[x, y] = tile;
             }
         }
     }
