@@ -27,13 +27,11 @@ public class TileSelection : MonoBehaviour
     }
 
     public async Task SwappingTiles(Tile tile1, Tile tile2){
-        var icon1 = tile1.icon;
-        var icon2 = tile2.icon;
+        var icon1 = tile1.icon.color;
 
         tile1.icon.color = tile2.icon.color;
-        tile2.icon.color = icon1.color;
+        tile2.icon.color = icon1;
         
-        await Task.Delay(1);
-        
+        await Task.CompletedTask;        
     }
 }
