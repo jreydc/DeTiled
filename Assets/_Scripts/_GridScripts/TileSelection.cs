@@ -6,12 +6,6 @@ using UnityEngine;
 
 public class TileSelection : MonoBehaviour
 {
-    #region TileSelection Single Instance;
-    public static TileSelection _Instance;   
-    private void Awake() {
-        _Instance = this;
-    }
-    #endregion
     private readonly List<Tile> _selection = new List<Tile>();
 
     public async void SelectingTiles(Tile tile){
@@ -33,19 +27,19 @@ public class TileSelection : MonoBehaviour
         _selection.Clear();
     }
 
-    public async Task SwappingTiles(Tile tile1, Tile tile2){
-        var icon1 = tile1.icon.color;
+    public async Task SwappingTiles(Tile tile1, Tile tile2){      
+        var icon1Color = tile1.icon.color;
 
         tile1.icon.color = tile2.icon.color;
-        tile2.icon.color = icon1;
-        
-        await Task.Delay(1);        
+        tile2.icon.color = icon1Color;
+
+        await Task.CompletedTask;        
     }
 
     public bool CanPop(){
-        for(int x = 0; x < GridGeneration.Dimension; x++){
-            for(int y = 0; y < GridGeneration.Dimension; y++){
-                if (GridGeneration.GetTiles[x, y].GetConnectedTiles().Skip(1).Count() >= 2) return true;
+        for(int x = 0; x < GridManager.dimension; x++){
+            for(int y = 0; y < GridManager.dimension; y++){
+                if (GridManager.Tiles[x, y].GetConnectedTiles().Skip(1).Count() >= 2) return true;
             }
 
         }
@@ -53,9 +47,9 @@ public class TileSelection : MonoBehaviour
     }
 
     public async void Pop(){
-        for(int x = 0; x < GridGeneration.Dimension; x++){
-            for(int y = 0; y < GridGeneration.Dimension; y++){
-                var tile = GridGeneration.GetTiles[x, y];
+        for(int x = 0; x < GridManager.dimension; x++){
+            for(int y = 0; y < GridManager.dimension; y++){
+                var tile = GridManager.Tiles[x, y];
 
                 var connectedTiles = tile.GetConnectedTiles();
 
@@ -68,7 +62,7 @@ public class TileSelection : MonoBehaviour
                 await Task.Delay(1);
 
                 foreach (var connectedTile in connectedTiles){
-                    connectedTile.ColorChange = GridGeneration.GetColors[UnityEngine.Random.Range(0, GridGeneration.GetColorNumber)];
+                    connectedTile.icon.color = GridManager.colors[UnityEngine.Random.Range(0, GridManager.colorNumber)];
 
                     connectedTile.transform.localScale = Vector3.one; //returns back to the normal scale of the connected tiles
                 }
