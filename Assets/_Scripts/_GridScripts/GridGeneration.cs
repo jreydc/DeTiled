@@ -4,7 +4,6 @@ using UnityEngine;
 public class GridGeneration : MonoBehaviour
 {
     private Row[] rows; 
-
     private static Color[] colors => new[]{
         Color.green,
         Color.red, 
