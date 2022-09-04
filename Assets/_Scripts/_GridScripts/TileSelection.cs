@@ -24,11 +24,11 @@ public class TileSelection : MonoBehaviour
 
         await SwappingTiles(_selection[0], _selection[1]);
 
-        if (CanPop()){
+        /* if (CanPop()){
             Pop();
         }else{
             await SwappingTiles(_selection[0], _selection[1]);
-        }
+        } */
 
         _selection.Clear();
     }
@@ -39,7 +39,7 @@ public class TileSelection : MonoBehaviour
         tile1.icon.color = tile2.icon.color;
         tile2.icon.color = icon1;
         
-        await Task.CompletedTask;        
+        await Task.Delay(1);        
     }
 
     public bool CanPop(){
@@ -62,7 +62,7 @@ public class TileSelection : MonoBehaviour
                 if (connectedTiles.Skip(1).Count() < 2) continue;//skips the first tile on the iterations
 
                 foreach (var connectedTile in connectedTiles) {
-                    StartCoroutine(ReduceTileScale(connectedTile.transform, Vector3.zero)); //minimizes the scale of the connected tiles
+                    connectedTile.transform.localScale = Vector3.zero; //minimizes the scale of the connected tiles
                 }
 
                 await Task.Delay(1);
@@ -70,33 +70,35 @@ public class TileSelection : MonoBehaviour
                 foreach (var connectedTile in connectedTiles){
                     connectedTile.ColorChange = GridGeneration.GetColors[UnityEngine.Random.Range(0, GridGeneration.GetColorNumber)];
 
-                    StartCoroutine(ReduceTileScale(connectedTile.transform, Vector3.one)); //returns back to the normal scale of the connected tiles
+                    connectedTile.transform.localScale = Vector3.one; //returns back to the normal scale of the connected tiles
                 }
 
-                await Task.CompletedTask;
+                await Task.Delay(1);
             }
 
         }
     }
 
-    private IEnumerator ReduceTileScale(Transform tileTransform, Vector3 intendedScale){
-        yield return null;
+    /* private IEnumerator ReduceTileScale(Transform tileTransform, Vector3 intendedScale){
+        
         Vector3 scale2Change = new Vector3(0.25f, 0.25f, 0.25f);
 
         while (tileTransform.localScale != intendedScale)
         {
             tileTransform.localScale -= scale2Change;
         }
+        yield return tileTransform;
     }
 
     private IEnumerator IncreaseTileScale(Transform tileTransform, Vector3 intendedScale){
-        yield return null;
         Vector3 scale2Change = new Vector3(0.25f, 0.25f, 0.25f);
 
         while (tileTransform.localScale != intendedScale)
         {
             tileTransform.localScale += scale2Change;
         }
-    }
+
+        yield return tileTransform;
+    } */
 }
 
