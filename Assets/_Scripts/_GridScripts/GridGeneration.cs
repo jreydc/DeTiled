@@ -3,12 +3,7 @@ using UnityEngine;
 
 public class GridGeneration : MonoBehaviour
 {
-    private static int dimension => PlayerPrefs.GetInt("Even");
-    private static int colorNumber => PlayerPrefs.GetInt("Another");
     private Row[] rows; 
-    [SerializeField]private Tile tile;
-    [SerializeField]private Row columns;
-
     private static Color[] colors => new[]{
         Color.green,
         Color.red, 
@@ -21,18 +16,11 @@ public class GridGeneration : MonoBehaviour
     public static Tile[,] GetTiles {
         get {return Tiles;}
     }
-    public static int Dimension {
-        get {return dimension;} 
-    }
-
-    public static int GetColorNumber {
-        get {return colorNumber;} 
-    }
-
+    
     public static Color[] GetColors{
         get {return colors;}
     }
-    public void GeneratingGrid(){
+    public void GeneratingGrid(Tile tile, Row columns, int dimension, int colorNumber){
         rows = new Row[dimension];
 
         Tiles = new Tile[dimension, rows.Length]; 

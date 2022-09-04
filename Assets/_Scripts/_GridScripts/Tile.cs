@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public sealed class Tile: ButtonBase
 {
+    [SerializeField]private TileSelection _tileSelector;
     public int x;
     public int y;
     public int value;
@@ -23,14 +24,14 @@ public sealed class Tile: ButtonBase
     public override void ButtonEventCalling()//responsible on the tile selection , inheriting the Button Base virtual method
     {
         base.ButtonEventCalling();
-        TileSelection._Instance.SelectingTiles(this);
+        _tileSelector.SelectingTiles(this);
     }
 
     //Checking Neighbours
-    public Tile _left => x > 0 ? GridGeneration.GetTiles[x - 1, y] : null;
-    public Tile _top => y > 0 ? GridGeneration.GetTiles[x , y - 1] : null;
-    public Tile _right => x < GridGeneration.Dimension - 1 ? GridGeneration.GetTiles[x + 1, y] : null;
-    public Tile _bottom => y < GridGeneration.Dimension - 1 ? GridGeneration.GetTiles[x , y + 1] : null;
+    public Tile _left => x > 0 ? GridManager.Tiles[x - 1, y] : null;
+    public Tile _top => y > 0 ? GridManager.Tiles[x, y - 1] : null;
+    public Tile _right => x < GridManager.dimension - 1? GridManager.Tiles[x, y + 1] : null;
+    public Tile _bottom => y < GridManager.dimension - 1 ? GridManager.Tiles[x + 1, y] : null;
 
     public Tile[] Neighbours => new[]{
         _left,
@@ -51,7 +52,7 @@ public sealed class Tile: ButtonBase
 
         //Iterates all of the neighbouring tile and checks the conditions 
         foreach (var neighbour in Neighbours){
-            if (neighbour == null || exclude.Contains(neighbour) || neighbour._color != _color) continue;
+            if (neighbour == null || exclude.Contains(neighbour) || neighbour.icon.color != this.icon.color) continue;
 
             result.AddRange(neighbour.GetConnectedTiles(exclude));
         }
