@@ -4,22 +4,11 @@ using UnityEngine;
 public class GridGeneration : MonoBehaviour
 {
     private Row[] rows; 
-    private static Color[] colors => new[]{
-        Color.green,
-        Color.red, 
-        Color.white,
-        Color.blue,
-        Color.magenta
-    };
-
     public static Tile[,] Tiles;
     public static Tile[,] GetTiles {
         get {return Tiles;}
     }
-    
-    public static Color[] GetColors{
-        get {return colors;}
-    }
+   
     public void GeneratingGrid(Tile tile, Row columns, int dimension, int colorNumber){
         rows = new Row[dimension];
 
@@ -40,7 +29,7 @@ public class GridGeneration : MonoBehaviour
                 rows[x]._tiles[y].x = x;
                 rows[x]._tiles[y].y = y;
 
-                rows[x]._tiles[y].ColorChange = colors[UnityEngine.Random.Range(0, colorNumber)];             
+                rows[x]._tiles[y].ColorChange = GridManager.colors[UnityEngine.Random.Range(0, colorNumber)];             
                 
                 Tiles[x, y] = rows[x]._tiles[y];
             }

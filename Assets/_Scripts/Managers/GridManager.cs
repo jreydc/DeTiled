@@ -15,7 +15,11 @@ public class GridManager : MonoBehaviour
     public static int dimension => PlayerPrefs.GetInt("Even");
     public static int colorNumber => PlayerPrefs.GetInt("Another");
     private Row[] rows; 
-    public static Tile[,] Tiles;
+    public static Tile[,] Tiles ;
+    public static Tile[,] GetTiles {
+        get {return Tiles;}
+        private set{}
+    }
     [SerializeField]private Tile tile;
     [SerializeField]private Row columns;
 
