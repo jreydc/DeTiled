@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -61,16 +62,15 @@ public class TileSelection : MonoBehaviour
                 if (connectedTiles.Skip(1).Count() < 2) continue;//skips the first tile on the iterations
 
                 foreach (var connectedTile in connectedTiles) {
-                    if(connectedTile.transform.localScale != Vector3.zero)
-                    connectedTile.transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f); //minimizes the scale of the connected tiles
+                    StartCoroutine(ReduceTileScale(connectedTile.transform, Vector3.zero)); //minimizes the scale of the connected tiles
                 }
 
-                //await Task.Delay(1);
+                await Task.Delay(1);
 
                 foreach (var connectedTile in connectedTiles){
                     connectedTile.ColorChange = GridGeneration.GetColors[UnityEngine.Random.Range(0, GridGeneration.GetColorNumber)];
 
-                    connectedTile.transform.localScale = Vector3.one; //returns back to the normal scale of the connected tiles
+                    StartCoroutine(ReduceTileScale(connectedTile.transform, Vector3.one)); //returns back to the normal scale of the connected tiles
                 }
 
                 await Task.CompletedTask;
@@ -78,4 +78,25 @@ public class TileSelection : MonoBehaviour
 
         }
     }
+
+    private IEnumerator ReduceTileScale(Transform tileTransform, Vector3 intendedScale){
+        yield return null;
+        Vector3 scale2Change = new Vector3(0.25f, 0.25f, 0.25f);
+
+        while (tileTransform.localScale != intendedScale)
+        {
+            tileTransform.localScale -= scale2Change;
+        }
+    }
+
+    private IEnumerator IncreaseTileScale(Transform tileTransform, Vector3 intendedScale){
+        yield return null;
+        Vector3 scale2Change = new Vector3(0.25f, 0.25f, 0.25f);
+
+        while (tileTransform.localScale != intendedScale)
+        {
+            tileTransform.localScale += scale2Change;
+        }
+    }
 }
+
