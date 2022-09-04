@@ -37,26 +37,34 @@ public class TileSelection : MonoBehaviour
     }
 
     public async Task SwappingTiles(Tile tile1, Tile tile2){      
-        var icon1 = tile1.icon.color;
+        /* var icon1 = tile1.icon.color;
 
         tile1.icon.color = tile2.icon.color;
-        tile2.icon.color = icon1;
+        tile2.icon.color = icon1; */
+
+        RectTransform icon1 = tile1.GetComponent<RectTransform>();
+        RectTransform icon2 = tile2.GetComponent<RectTransform>();
+
+        tile1.GetComponent<RectTransform>().anchoredPosition = icon2.anchoredPosition;
+        tile2.GetComponent<RectTransform>().anchoredPosition = icon1.anchoredPosition;
 
         await Task.CompletedTask;        
     }
 
     public bool CanPop(){
-        for(int x = 0; x < dimension; x++)
-            for(int y = 0; y < dimension; y++)
-                if (GridManager.GetTiles[x, y].GetConnectedTiles().Skip(1).Count() >= 2) return true;
-        
+        for(int x = 0; x < dimension; x++){
+            for(int y = 0; y < dimension; y++){
+                if (GridGeneration.Tiles[x, y].GetConnectedTiles().Skip(1).Count() >= 2) return true;
+            }
+        }
+        Debug.Log(dimension);
         return false;
     }
 
     public async void Pop(){
         for(int x = 0; x < GridManager.dimension; x++){
             for(int y = 0; y < GridManager.dimension; y++){
-                var tile = GridManager.Tiles[x, y];
+                var tile = GridGeneration.Tiles[x, y];
 
                 var connectedTiles = tile.GetConnectedTiles();
 
@@ -68,40 +76,16 @@ public class TileSelection : MonoBehaviour
                     connectedTile.transform.localScale = Vector3.zero; //minimizes the scale of the connected tiles
                 }
 
-                
-
                 foreach (var connectedTile in connectedTiles){
-                    connectedTile.icon.color = GridManager.colors[UnityEngine.Random.Range(0, GridManager.colorNumber)];
+                    connectedTile.ColorChange = GridManager.colors[UnityEngine.Random.Range(0, GridManager.colorNumber)];
 
                     connectedTile.transform.localScale = Vector3.one; //returns back to the normal scale of the connected tiles
                 }
 
-                await Task.CompletedTask;
+                await Task.Delay(1);
             }
 
         }
     }
-
-    /* private IEnumerator ReduceTileScale(Transform tileTransform, Vector3 intendedScale){
-        
-        Vector3 scale2Change = new Vector3(0.25f, 0.25f, 0.25f);
-
-        while (tileTransform.localScale != intendedScale)
-        {
-            tileTransform.localScale -= scale2Change;
-        }
-        yield return tileTransform;
-    }
-
-    private IEnumerator IncreaseTileScale(Transform tileTransform, Vector3 intendedScale){
-        Vector3 scale2Change = new Vector3(0.25f, 0.25f, 0.25f);
-
-        while (tileTransform.localScale != intendedScale)
-        {
-            tileTransform.localScale += scale2Change;
-        }
-
-        yield return tileTransform;
-    } */
 }
 

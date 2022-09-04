@@ -27,10 +27,10 @@ public sealed class Tile: ButtonBase
     }
 
     //Checking Neighbours
-    public Tile _left => x > 0 ? GridManager.Tiles[x - 1, y] : null;
-    public Tile _top => y > 0 ? GridManager.Tiles[x, y - 1] : null;
-    public Tile _right => x < GridManager.dimension - 1? GridManager.Tiles[x + 1, y] : null;
-    public Tile _bottom => y < GridManager.dimension - 1 ? GridManager.Tiles[x, y + 1] : null;
+    public Tile _left => x > 0 ? GridGeneration.Tiles[x - 1, y] : null;
+    public Tile _top => y > 0 ? GridGeneration.Tiles[x, y - 1] : null;
+    public Tile _right => x < GridManager.dimension - 1? GridGeneration.Tiles[x + 1, y] : null;
+    public Tile _bottom => y < GridManager.dimension - 1 ? GridGeneration.Tiles[x, y + 1] : null;
 
     public Tile[] Neighbours => new[]{
         _left,
@@ -51,9 +51,9 @@ public sealed class Tile: ButtonBase
 
         //Iterates all of the neighbouring tile and checks the conditions 
         foreach (var neighbour in Neighbours){
-            if (neighbour == null || exclude.Contains(neighbour)) continue;
+            if (neighbour == null || exclude.Contains(neighbour) || neighbour.icon.color != icon.color) continue;
 
-            if (neighbour.icon.color == icon.color) result.AddRange(neighbour.GetConnectedTiles(exclude));
+            result.AddRange(neighbour.GetConnectedTiles(exclude));
         }
 
         return result;
