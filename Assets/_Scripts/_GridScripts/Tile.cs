@@ -20,7 +20,7 @@ public sealed class Tile: ButtonBase
             icon.color = _color;
         }
     }
-    public override void ButtonEventCalling()//responsible on the tile selection , inhereting the Button Base virtual method
+    public override void ButtonEventCalling()//responsible on the tile selection , inheriting the Button Base virtual method
     {
         base.ButtonEventCalling();
         TileSelection._Instance.SelectingTiles(this);
@@ -44,7 +44,7 @@ public sealed class Tile: ButtonBase
         
         //To avoid infinite recursion and excluding this tile after checking
         if (exclude == null){
-            exclude = new List<Tile>{this, };
+            exclude = new List<Tile>{this,};
         }else{
             exclude.Add(this);
         }
