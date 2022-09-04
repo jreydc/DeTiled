@@ -1,17 +1,41 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class GridGeneration : MonoBehaviour
 {
-    private int dimension => PlayerPrefs.GetInt("Even");
-    private int colorNumber => PlayerPrefs.GetInt("Another");
+    private static int dimension => PlayerPrefs.GetInt("Even");
+    private static int colorNumber => PlayerPrefs.GetInt("Another");
     private Row[] rows; 
     [SerializeField]private Tile tile;
     [SerializeField]private Row columns;
 
+    private static Color[] colors => new[]{
+        Color.green,
+        Color.red, 
+        Color.white,
+        Color.blue,
+        Color.magenta
+    };
+
+    public static Tile[,] Tiles;
+    public static Tile[,] GetTiles {
+        get {return Tiles;}
+    }
+    public static int Dimension {
+        get {return dimension;} 
+    }
+
+    public static int GetColorNumber {
+        get {return colorNumber;} 
+    }
+
+    public static Color[] GetColors{
+        get {return colors;}
+    }
     public void GeneratingGrid(){
         rows = new Row[dimension];
 
-        //Tiles = new Tile[rows.Max(row => row._tiles.Length), rows.Length]; 
+        Tiles = new Tile[dimension, rows.Length]; 
         for(int x = 0; x < dimension; x++){
             
             rows[x] = Instantiate(columns, transform.position, Quaternion.identity);
@@ -28,14 +52,9 @@ public class GridGeneration : MonoBehaviour
                 rows[x]._tiles[y].x = x;
                 rows[x]._tiles[y].y = y;
 
-                rows[x]._tiles[y].ColorChange = new Color(
-                    Random.Range(0f, colorNumber), 
-                    Random.Range(0f, colorNumber), 
-                    Random.Range(0f, colorNumber)
-                );
-
+                rows[x]._tiles[y].ColorChange = colors[UnityEngine.Random.Range(0, colorNumber)];             
                 
-                //Tiles[x, y] = tile;
+                Tiles[x, y] = rows[x]._tiles[y];
             }
         }
     }
