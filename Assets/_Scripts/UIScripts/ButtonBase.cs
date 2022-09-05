@@ -13,7 +13,5 @@ public abstract class ButtonBase : MonoBehaviour
         });
     }
 
-    public virtual void ButtonEventCalling(){
-        Debug.Log(_button.name + "clicked!");
-    }
+    public virtual void ButtonEventCalling(){}
 }
