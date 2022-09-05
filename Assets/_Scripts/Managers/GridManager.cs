@@ -14,6 +14,10 @@ public class GridManager : MonoBehaviour
     #endregion
     public static int dimension => PlayerPrefs.GetInt("Even");
     public static int colorNumber => PlayerPrefs.GetInt("Another");
+
+    private PointingSystem pointer;
+    [SerializeField]private Scorer scorer;
+    [SerializeField]private Swapper swapper;
     private Row[] rows; 
     [SerializeField]private Tile tile;
     [SerializeField]private Row columns;
@@ -30,17 +34,23 @@ public class GridManager : MonoBehaviour
     
     private void Start() {      
         _gridGenerator.GeneratingGrid(tile, columns, dimension, colorNumber);
+        pointer = new PointingSystem(TileSelection.GetScore, TileSelection.GetSwapped);
+        swapper.PointerSetup(pointer);
+        scorer.PointerSetup(pointer);
     }
 
     private void Update() {
         //for testing on the connected tiles
-        if(!Input.GetKeyDown(KeyCode.Space)) return;
+        /* if(!Input.GetKeyDown(KeyCode.Space)) return;
 
         foreach(var connectedTiles in GridGeneration.Tiles[0,0].GetConnectedTiles()){
             connectedTiles.transform.localScale = new Vector3(1.25f, 1.25f, 1.25f);
-        }
+        } */
     }
 
+
+    /* <summary> the code below were refactored ............................
+     */
     //TileSelection Class
     
     /* private readonly List<Tile> _selection = new List<Tile>();
