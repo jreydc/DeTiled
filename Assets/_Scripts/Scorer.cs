@@ -10,7 +10,7 @@ public class Scorer : MonoBehaviour
     }
     #endregion
     private PointingSystem _pointer;
-    [SerializeField]private TMP_Text scoreText;
+    [SerializeField]private TextMeshProUGUI scoreText;
     public void PointerSetup(PointingSystem pointer){
         _pointer = pointer;
         _pointer.OnScoreChanged += Scoring_OnScoreChanged;
@@ -18,5 +18,9 @@ public class Scorer : MonoBehaviour
     
     private void Scoring_OnScoreChanged(object sender, System.EventArgs e){
         scoreText.text = $"Score {_pointer.GetScore()}";
+    }
+
+    public void OnScoreChanged(int score){
+        scoreText.text = $"Score: {score}";
     }
 }

@@ -19,12 +19,12 @@ public class TileSelection : MonoBehaviour
     private int dimension => GridManager.dimension;// pointing to the GridManager's dimension
     private Color[] colors => GridManager.colors;//pointing to the GridManager's colors
 
-    private static int score;
+    private static int score = 0;
     public static int GetScore{
         get{return score;}
         private set{}
     } 
-    private static int swapPoints;
+    private static int swapPoints = 0;
     public static int GetSwapped{
         get{return swapPoints;}
         private set{}
