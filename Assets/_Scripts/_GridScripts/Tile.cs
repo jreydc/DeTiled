@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public sealed class Tile: ButtonBase
 {
+    private TileSelection tileSelector; 
     public int x;
     public int y;
     public int value;
@@ -20,6 +21,9 @@ public sealed class Tile: ButtonBase
             icon.color = _color;
         }
     }
+
+    private void Start() =>  tileSelector = GetComponent<TileSelection>();
+
     public override void ButtonEventCalling()//responsible on the tile selection , inheriting the Button Base virtual method
     {
         base.ButtonEventCalling();
@@ -32,7 +36,7 @@ public sealed class Tile: ButtonBase
     public Tile _right => x < GridManager.dimension - 1? GridGeneration.Tiles[x + 1, y] : null;
     public Tile _bottom => y < GridManager.dimension - 1 ? GridGeneration.Tiles[x, y + 1] : null;
 
-    public Tile[] Neighbours => new[]{
+    public Tile[] Neighbours => new Tile[]{
         _left,
         _top,
         _right,
@@ -55,7 +59,6 @@ public sealed class Tile: ButtonBase
 
             result.AddRange(neighbour.GetConnectedTiles(exclude));
         }
-
         return result;
     }
 }
