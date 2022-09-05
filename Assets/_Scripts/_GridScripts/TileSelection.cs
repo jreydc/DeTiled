@@ -14,10 +14,11 @@ public class TileSelection : MonoBehaviour
     #endregion
     private readonly List<Tile> _selection = new List<Tile>();
 
-    private int dimension => GridManager.dimension;
+    private int dimension => GridManager.dimension;// pointing to the GridManager's dimension
+    private Color[] colors => GridManager.colors;//pointing to the GridManager's colors
 
 
-    public async void SelectingTiles(Tile tile){
+    public async void SelectingTiles(Tile tile){//Responsible for the Selection of tiles
 
         if(!_selection.Contains(tile)) _selection.Add(tile);
 
@@ -25,7 +26,7 @@ public class TileSelection : MonoBehaviour
 
         Debug.Log($"Selected tiles at ({_selection[0].x}, {_selection[0].y} and ({_selection[1].x}, {_selection[1].y}))");
 
-        await SwappingTiles(_selection[0], _selection[1]);
+        await SwappingTiles(_selection[0], _selection[1]); 
 
         if (CanPop()){
             Pop();
@@ -36,17 +37,13 @@ public class TileSelection : MonoBehaviour
         _selection.Clear();
     }
 
-    public async Task SwappingTiles(Tile tile1, Tile tile2){      
-        /* var icon1 = tile1.icon.color;
+    public async Task SwappingTiles(Tile tile1, Tile tile2){ //Responsible for the Swapping of Tiles     
+        var tempTile1 = tile1;
+        tile1 = tile2;      
+        tile2 = tempTile1;
 
-        tile1.icon.color = tile2.icon.color;
-        tile2.icon.color = icon1; */
-
-        RectTransform icon1 = tile1.GetComponent<RectTransform>();
-        RectTransform icon2 = tile2.GetComponent<RectTransform>();
-
-        tile1.GetComponent<RectTransform>().anchoredPosition = icon2.anchoredPosition;
-        tile2.GetComponent<RectTransform>().anchoredPosition = icon1.anchoredPosition;
+        Debug.Log($"Swapped tiles at ({tile1.x}, {tile1.y} and ({tile2.x}, {tile2.y}))");
+        Debug.Log($"Swapped colors ({tile1.icon.color} and ({tile2.icon.color}))");
 
         await Task.CompletedTask;        
     }
@@ -54,16 +51,15 @@ public class TileSelection : MonoBehaviour
     public bool CanPop(){
         for(int x = 0; x < dimension; x++){
             for(int y = 0; y < dimension; y++){
-                if (GridGeneration.Tiles[x, y].GetConnectedTiles().Skip(1).Count() >= 2) return true;
+                if (GridGeneration.Tiles[x, y].GetConnectedTiles().Skip(1).Count() > 2) return true;
             }
         }
-        Debug.Log(dimension);
         return false;
     }
 
     public async void Pop(){
-        for(int x = 0; x < GridManager.dimension; x++){
-            for(int y = 0; y < GridManager.dimension; y++){
+        for(int x = 0; x < dimension; x++){
+            for(int y = 0; y < dimension; y++){
                 var tile = GridGeneration.Tiles[x, y];
 
                 var connectedTiles = tile.GetConnectedTiles();
@@ -77,7 +73,7 @@ public class TileSelection : MonoBehaviour
                 }
 
                 foreach (var connectedTile in connectedTiles){
-                    connectedTile.ColorChange = GridManager.colors[UnityEngine.Random.Range(0, GridManager.colorNumber)];
+                    connectedTile.ColorChange = colors[UnityEngine.Random.Range(0, GridManager.colorNumber)];
 
                     connectedTile.transform.localScale = Vector3.one; //returns back to the normal scale of the connected tiles
                 }
