@@ -10,7 +10,7 @@ public class Timer : MonoBehaviour
     void Update()
     {
         timeLeft -= Time.deltaTime;
-        if (timeLeft == 0){
+        if (timeLeft == 0f){
             SceneController._Instance.LoadLevelDetails("GameOverScene");
         }
     }
