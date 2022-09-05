@@ -10,7 +10,7 @@ public class Swapper : MonoBehaviour
     }
     #endregion
     private PointingSystem _pointer;
-    [SerializeField]private TMP_Text swapText;
+    [SerializeField]private TextMeshProUGUI swapText;
     public void PointerSetup(PointingSystem pointer){
         _pointer = pointer;
         _pointer.OnSwapChanged += Swapping_OnSwapChanged;
@@ -18,5 +18,9 @@ public class Swapper : MonoBehaviour
     
     private void Swapping_OnSwapChanged(object sender, System.EventArgs e){
         swapText.text = $"Swap {_pointer.GetSwap()}";
+    }
+
+    public void OnSwapChanged(int swaps){
+        swapText.text = $"Swap {swaps}";
     }
 }

@@ -1,8 +1,5 @@
-using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
+using JDevTools.Runtime.GameSystemComponents.Timers;
 
 public class GridManager : MonoBehaviour
 {
@@ -18,6 +15,7 @@ public class GridManager : MonoBehaviour
     private PointingSystem pointer;
     [SerializeField]private Scorer scorer;
     [SerializeField]private Swapper swapper;
+    [SerializeField]private Timer timer;
     private Row[] rows; 
     [SerializeField]private Tile tile;
     [SerializeField]private Row columns;
@@ -37,20 +35,50 @@ public class GridManager : MonoBehaviour
         pointer = new PointingSystem(TileSelection.GetScore, TileSelection.GetSwapped);
         swapper.PointerSetup(pointer);
         scorer.PointerSetup(pointer);
+        
+        //_timer.OnTimerEnd += () => SceneController._Instance.LoadLevelDetails("GameOverScene");
+        
     }
 
-    private void Update() {
-        //for testing on the connected tiles
-        /* if(!Input.GetKeyDown(KeyCode.Space)) return;
-
-        foreach(var connectedTiles in GridGeneration.Tiles[0,0].GetConnectedTiles()){
-            connectedTiles.transform.localScale = new Vector3(1.25f, 1.25f, 1.25f);
-        } */
+    private void FixedUpdate() {
+        timer.OnTimerChanged();
+        scorer.OnScoreChanged(TileSelection.GetScore);
+        swapper.OnSwapChanged(TileSelection.GetSwapped);
     }
 
 
-    /* <summary> the code below were refactored ............................
+    /* <summary> the code below were refactored to various classes............................
      */
+    //GridGeneration Class
+    /* public void GeneratingGrid(Tile tile, Row columns, int dimension, int colorNumber){
+        rows = new Row[dimension];
+
+        Tiles = new Tile[dimension, rows.Length]; 
+        for(int x = 0; x < dimension; x++){
+            
+            rows[x] = Instantiate(columns, transform.position, Quaternion.identity);
+            rows[x].transform.SetParent(transform);
+            rows[x].transform.localScale = Vector3.one;
+            
+            rows[x]._tiles = new Tile[dimension];
+
+            for(int y = 0; y < rows[x]._tiles.Length; y++){
+                rows[x]._tiles[y] = Instantiate(tile, rows[x].transform.position, Quaternion.identity);
+                rows[x]._tiles[y].transform.SetParent(rows[x].transform);
+                rows[x]._tiles[y].transform.localScale = Vector3.one;
+                rows[x]._tiles[y].name = $"Tile {x}{y}";
+                rows[x]._tiles[y].x = x;
+                rows[x]._tiles[y].y = y;
+
+                rows[x]._tiles[y].ColorChange = GridManager.colors[UnityEngine.Random.Range(0, colorNumber)];             
+                
+                Tiles[x, y] = rows[x]._tiles[y];
+            }
+        }
+    } */
+
+
+
     //TileSelection Class
     
     /* private readonly List<Tile> _selection = new List<Tile>();
@@ -121,7 +149,7 @@ public class GridManager : MonoBehaviour
                     connectedTile.transform.localScale = Vector3.one; //returns back to the normal scale of the connected tiles
                 }
 
-                await Task.Delay(1);
+                await Task.CompletedTask;;
             }
 
         }
