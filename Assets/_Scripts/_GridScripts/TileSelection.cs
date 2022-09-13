@@ -39,12 +39,12 @@ public class TileSelection : MonoBehaviour
 
         await SwappingTiles(_selection[0], _selection[1]); 
 
-        if (CanPop()){
+        /* if (CanPop()){
             Pop();
             swapPoints += 1;
         }else{
             await SwappingTiles(_selection[0], _selection[1]);
-        }
+        } */
 
         _selection.Clear();
     }

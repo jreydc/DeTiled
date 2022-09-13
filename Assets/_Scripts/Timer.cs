@@ -11,7 +11,8 @@ public class Timer : MonoBehaviour
     {
         timeLeft -= Time.deltaTime;
         if (timeLeft == 0f){
-            SceneController._Instance.LoadLevelDetails("GameOverScene");
+            //SceneController._Instance.LoadLevelDetails("GameOverScene");
+            Debug.Log("Time Ends");
         }
     }
 
