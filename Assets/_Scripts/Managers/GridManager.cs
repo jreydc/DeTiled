@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GridManager : MonoBehaviour
 {
     [SerializeField] private int _width, _height;
+    [SerializeField] private Transform _canvasPosition;
     [SerializeField] private Tile _tilePrefab;
     [SerializeField] private Sprite[] _sprite;
     [SerializeField] private Transform _camera;
@@ -16,6 +18,7 @@ public class GridManager : MonoBehaviour
             for(int y = 0; y < _height; y++){
                 var spawnedTile = Instantiate(_tilePrefab, new Vector3(x,y), Quaternion.identity);
                 spawnedTile.name = $"Tile{x}{y}";
+                spawnedTile.transform.SetParent(_canvasPosition);
                 int id = Random.Range(0, 5);
                 spawnedTile.Init(id, new Vector3(x,y), _sprite[id]);
             
