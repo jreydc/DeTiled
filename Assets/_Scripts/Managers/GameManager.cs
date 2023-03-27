@@ -25,7 +25,6 @@ public class GameManager : Singleton<GameManager>
             case GameState.GAME:
                 break;
             case GameState.POSTGAME:
-
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
@@ -44,7 +43,6 @@ public class GameManager : Singleton<GameManager>
     }
 
     private void HandlePreGame(){
-        
         ChangeState(GameState.GAME);
     }
 
