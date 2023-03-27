@@ -5,7 +5,7 @@ public abstract class ButtonBase : MonoBehaviour
 {
     public Button _button;
 
-    private void Awake() {
+    protected virtual void Awake() {
         _button = GetComponent<Button>();
 
         _button.onClick.AddListener( ()=>{
@@ -13,5 +13,7 @@ public abstract class ButtonBase : MonoBehaviour
         });
     }
 
-    public virtual void ButtonEventCalling(){}
+    protected virtual void ButtonEventCalling(){
+        Debug.Log(_button.name + "clicked!");
+    }
 }

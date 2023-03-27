@@ -6,25 +6,11 @@ using UnityEngine;
 /// and saves you doing it manually
 /// </summary>
 public abstract class StaticInstance<T> : MonoBehaviour where T : MonoBehaviour {
-    private static T _instance;
-    public static T Instance
-    {
-        get{
-            if (!_instance)
-            {
-                GameObject obj = new GameObject();
-                obj.name = typeof(T).Name;
-                _instance = obj.AddComponent<T>();
-            }
-            return _instance;
-        }
-    }
-    protected virtual void Awake(){
-        _instance = this as T;
-    }
+    public static T _Instance { get; private set; }
+    protected virtual void Awake() => _Instance = this as T;
 
     protected virtual void OnApplicationQuit() {
-        _instance = null;
+        _Instance = null;
         Destroy(gameObject);
     }
 }
@@ -35,7 +21,7 @@ public abstract class StaticInstance<T> : MonoBehaviour where T : MonoBehaviour 
 /// </summary>
 public abstract class Singleton<T> : StaticInstance<T> where T : MonoBehaviour {
     protected override void Awake() {
-        if (Instance != null) Destroy(gameObject);
+        if (_Instance != null) Destroy(gameObject);
         base.Awake();
     }
 }
@@ -51,5 +37,4 @@ public abstract class PersistentSingleton<T> : Singleton<T> where T : MonoBehavi
         DontDestroyOnLoad(gameObject);
     }
 }
-
 
