@@ -9,11 +9,8 @@ EditorBuildSettings:
     path: Assets/_Scenes/PreGameScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/_Scenes/MainGameScene.unity
-    guid: ee700742eede3264d9c3e4d347aaf1e8
-  - enabled: 1
-    path: Assets/_Scenes/GameOverScene.unity
-    guid: 0aacfe5251b5c94428fe3a2f9b5bb25f
+    path: Assets/_Scenes/GameScene.unity
+    guid: fb4c3d1b45c3b8a4094d3fdc0fc7673c
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: c14df3ab678b1ef47915cbd4338bddeb,
       type: 2}
