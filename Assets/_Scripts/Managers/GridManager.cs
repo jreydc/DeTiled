@@ -7,15 +7,21 @@ public class GridManager : MonoBehaviour
 {
     [SerializeField] private int _width, _height;
     [SerializeField] private RectTransform _canvasTrans;
-    [SerializeField] private Tile _tilePrefab;
-    [SerializeField] private Tile[,] _tiles;
-    [SerializeField] private Sprite[] _sprite;
     [SerializeField] private Transform _camera;
     [SerializeField] private Vector2 _tileSize;
 
-    private void Start() => GenerateGrid();
+    #region Tiles Properties
+    [SerializeField] private Tile _tilePrefab;
+    [SerializeField] private Tile[,] _tiles;
+    [SerializeField] private Sprite[] _sprite;
+    #endregion
 
-    private void GenerateGrid(){
+    private void Start() {
+        GenerateGrid();
+        
+    }
+
+    public void GenerateGrid(){
         
         _tiles = new Tile[_width, _height];
         for(int x = 0; x < _width; x++){
@@ -35,5 +41,4 @@ public class GridManager : MonoBehaviour
         _camera.transform.position = new Vector3((float)(Screen.width / 2),(float)(Screen.height / 2) , _camera.transform.position.z);
     }
 
-    
 }

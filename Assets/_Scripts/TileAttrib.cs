@@ -1,5 +1,5 @@
 using UnityEngine;
-
+[System.Serializable]
 public struct TileAttrib
 {
     public int tileID;

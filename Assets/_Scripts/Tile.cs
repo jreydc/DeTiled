@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Tile : ButtonBase
 {
-    public delegate void TileClickerEventHandler(int id);
+    public delegate void TileClickerEventHandler(Tile _tile);
     public static event TileClickerEventHandler OnTileClicked;
     public TileAttrib tileAt3b;
     public Transform tileSprite, tileHighlights;
@@ -24,9 +24,10 @@ public class Tile : ButtonBase
     protected override void ButtonEventCalling()
     {
         base.ButtonEventCalling();
-        OnTileClicked?.Invoke(tileAt3b.tileID);
         isActive = isActive == false ? true : false;
         tileHighlights.gameObject.SetActive(isActive);
+        
+        OnTileClicked.Invoke(this);
         Debug.Log(tileAt3b.tileID+"-"+tileAt3b.tilePosition);
     }
 }
