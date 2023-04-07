@@ -9,7 +9,11 @@ public class GameManager : Singleton<GameManager>
     public GameState State { get; private set; }
 
     // Kick the game off with the first state
-    void Start() => ChangeState(GameState.STARTING);
+    void Start() {
+        ChangeState(GameState.STARTING);
+    }
+
+    public void QuitGame() => Application.Quit();
 
     public void ChangeState(GameState newState) {
         OnBeforeStateChanged?.Invoke(newState);
@@ -42,8 +46,10 @@ public class GameManager : Singleton<GameManager>
         ChangeState(GameState.PREGAME);
     }
 
-    private void HandlePreGame(){
-        ChangeState(GameState.GAME);
+    private void HandlePreGame() => ChangeState(GameState.GAME);
+
+    private void HandleGame(){
+        ChangeState(GameState.POSTGAME);
     }
 
 }

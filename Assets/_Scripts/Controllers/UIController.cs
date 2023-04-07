@@ -1,30 +1,15 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
-public class UIController : MonoBehaviour
+public abstract class UIController : MonoBehaviour
 {
-    #region UIController Single Instance;
-    public static UIController _Instance;   
-    private void Awake() {
-        _Instance = this;
-    }
-    #endregion 
+    [SerializeField]private GameObject _ui;
 
-    [SerializeField]private GameObject promptBox;
-    [SerializeField]private TMP_InputField inputEvenNumber;
-    [SerializeField]private TMP_InputField inputAnotherNumber;
-     
-    public void PromptBoxVisibility(bool isVisible){
-        promptBox.SetActive(isVisible);
+    public void UIVisibility(bool isVisible){
+        _ui.SetActive(isVisible);
     }
 
-    public int GetEvenNumberInput(){
-        return int.Parse(inputEvenNumber.text);
-    }
+    public virtual void UIDisplay(string textContent){
 
-    public int GetAnotherNumberInput(){
-        return int.Parse(inputAnotherNumber.text);
     }
 
 }

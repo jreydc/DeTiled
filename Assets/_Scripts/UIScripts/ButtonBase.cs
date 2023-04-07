@@ -3,9 +3,7 @@ using UnityEngine.UI;
 
 public abstract class ButtonBase : MonoBehaviour
 {
-    
     public Button _button;
-
     protected virtual void Awake() {
         _button = GetComponent<Button>();
 

@@ -3,6 +3,6 @@
     protected override void ButtonEventCalling()
     {
         base.ButtonEventCalling();
-        SceneController._Instance.LoadLevelDetails("GameScene");
+        SceneController._Instance.LoadLevel("GameScene");
     }
 }
