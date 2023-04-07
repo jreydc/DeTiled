@@ -16,11 +16,8 @@ public class InteractionManager : Singleton<InteractionManager>
         Tile.OnTileClicked -= OnTileClickedEvent;
     }
 
-    public void Init(Tile[,] tiles){
-
-    }
-
     public void OnTileClickedEvent(Tile _selected){
+         //bool isPresent = Array.Exists(_selectedTiles, element => element = _selected);
         int index = _selectedTiles[0] is not null ? 1 : 0;
         _selectedTiles[index] = _selected;
                 
@@ -40,7 +37,5 @@ public class InteractionManager : Singleton<InteractionManager>
             }
             Array.Clear(_selectedTiles, 0, _selectedTiles.Length);
         }
-
-        //bool isPresent = Array.Exists(_selectedTiles, element => element = _selected);
     }
 }

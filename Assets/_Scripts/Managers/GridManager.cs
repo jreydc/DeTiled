@@ -13,7 +13,6 @@ public class GridManager : MonoBehaviour
     #region Tiles Properties
     [SerializeField] private Tile _tilePrefab;
     [SerializeField] private Tile[,] _tiles;
-    [SerializeField] private Tile[,] _selectedTiles;
     [SerializeField] private Sprite[] _sprite;
     #endregion
 
@@ -22,8 +21,7 @@ public class GridManager : MonoBehaviour
         
     }
 
-
-    private void GenerateGrid(){
+    public void GenerateGrid(){
         
         _tiles = new Tile[_width, _height];
         for(int x = 0; x < _width; x++){
