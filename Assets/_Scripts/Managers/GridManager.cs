@@ -34,4 +34,6 @@ public class GridManager : MonoBehaviour
         }
         _camera.transform.position = new Vector3((float)(Screen.width / 2),(float)(Screen.height / 2) , _camera.transform.position.z);
     }
+
+    
 }
