@@ -5,18 +5,15 @@ using UnityEngine.SceneManagement;
 public class SceneController : Singleton<SceneController>
 {
 
-    public void UnloadLevel(string levelName)
-    {
-        SceneManager.UnloadSceneAsync(levelName, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
-    }
+    public void UnloadLevel(string levelName) => SceneManager.UnloadSceneAsync(levelName, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
+
+    public void LoadLevel(string levelName) => StartCoroutine(LoadingDetails(levelName));
 
     public Scene GetCurrentScene(){
         return SceneManager.GetActiveScene();
     }
-    /* 
-        Reference: https://gamedevbeginner.com/how-to-load-a-new-scene-in-unity-with-a-loading-screen/ By: John French - May 14, 2020
-    */
-    public IEnumerator LoadLevelDetails(string levelName){
+
+    IEnumerator LoadingDetails(string levelName){
         yield return null;
 
         //Begin to load the Scene you specify
