@@ -54,6 +54,7 @@ public class GameManager : PersistentSingleton<GameManager>
     private void HandleGame(){
         AudioManager._Instance.StopBGM();
         AudioManager._Instance.PlayBGM(AudioController._Instance.BGMSource[1]);
+        AudioManager._Instance.PlaySFX(AudioController._Instance.SFXClips[0]);
         //ChangeState(GameState.POSTGAME);
     }
     private void HandlePostGame(){
