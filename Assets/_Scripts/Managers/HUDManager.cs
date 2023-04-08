@@ -12,13 +12,18 @@ public class HUDManager : PersistentSingleton<HUDManager>
 
     private void Start() {
         InteractionManager.OnTileInteraction += OnMovementCompleteEvent;
+        InteractionManager.OnCorrectInteraction += OnScoreComputation;
+    }
+
+    private void OnDestroy() {
+        InteractionManager.OnTileInteraction -= OnMovementCompleteEvent;
+        InteractionManager.OnCorrectInteraction -= OnScoreComputation;
     }
 
     public void OnMovementCompleteEvent(){
         // Depending on the level difficulty, we could implement a max movements logic to the gameplay
         move += 1;
         _movesText.text = move.ToString();
-        OnScoreComputation();
     }
 
     public void OnScoreComputation(){

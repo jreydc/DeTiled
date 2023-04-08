@@ -7,11 +7,27 @@ public class InteractionManager : Singleton<InteractionManager>
 {
     public delegate void InteractionEventHandler();
     public static event InteractionEventHandler OnTileInteraction;
-    [SerializeField] private Tile[] _selectedTiles;
+
+    public delegate void CorrectPairInteractionEventHandler();
+    public static event CorrectPairInteractionEventHandler OnCorrectInteraction;
+
+    public delegate void GameOverEventHandler();
+    public static event GameOverEventHandler OnAllTileIsDisabled;
+
+    [SerializeField] private Tile[] _selectedTiles;// Selected Tiles
+    [SerializeField] private Tile[,] _tiles;//Spawned Tiles
+    private int _tileActive;
+    private bool isGameOver;
     private void Start()
     {
         Tile.OnTileClicked += OnTileClickedEvent;
         _selectedTiles = new Tile[2];
+        isGameOver = false;
+    }
+
+    public void Init(Tile[,] _tiles){
+        this._tiles = _tiles;
+        _tileActive = this._tiles.Length;
     }
 
     private void OnDestroy() {
@@ -27,7 +43,9 @@ public class InteractionManager : Singleton<InteractionManager>
             OnTileInteraction.Invoke();
             if (_selectedTiles[0].tileAt3b.tileID == _selected.tileAt3b.tileID)
             {
+                OnCorrectInteraction.Invoke();
                 DeactivateTileObjects(_selectedTiles[0], _selectedTiles[1]);
+                //TileActiveChecker();
                 AudioManager._Instance.PlaySFX(AudioController._Instance.SFXClips[2]);
             }
             else
@@ -54,4 +72,18 @@ public class InteractionManager : Singleton<InteractionManager>
         tile1.tileHighlights.gameObject.SetActive(false);
         tile2.tileHighlights.gameObject.SetActive(false);
     }
+
+    /* public void TileActiveChecker(){
+        bool allDeactivated = true;
+        foreach(var item in _tiles){
+            if(item.tileAt3b.isActive is false) allDeactivated = item.tileAt3b.isActive;
+        }
+        if(_tileActive <= 0 && allDeactivated) isGameOver = true;
+        _tileActive -= 2;
+        Debug.Log(_tileActive);
+        if (isGameOver){
+            OnAllTileIsDisabled.Invoke();//Raise an event for Game Over
+            Debug.Log("GameOver");
+        }
+    } */
 }
