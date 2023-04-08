@@ -14,11 +14,13 @@ public class GridManager : MonoBehaviour
     [SerializeField] private Tile _tilePrefab;
     [SerializeField] private Tile[,] _tiles;
     [SerializeField] private Sprite[] _sprite;
+
+    private int _tileActive;
     #endregion
 
     private void Start() {
         GenerateGrid();
-        
+        _tileActive = 0;
     }
 
     public void GenerateGrid(){
@@ -39,4 +41,12 @@ public class GridManager : MonoBehaviour
         }
         _camera.transform.position = new Vector3((float)(Screen.width / 2),(float)(Screen.height / 2) , _camera.transform.position.z);
     }
+
+/*     public bool TileChecker(){
+        foreach(var item in _tiles){
+            if(item.tileAt3b.isActive = false){
+                _tileActive += 1;
+            }
+        }
+    } */
 }

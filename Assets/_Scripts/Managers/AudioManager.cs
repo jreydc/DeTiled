@@ -8,7 +8,7 @@ public class AudioManager : PersistentSingleton<AudioManager>
     [SerializeField]private AudioSource sfxSource; // Reference to the audio source for sound effects
 
     // Play background music
-    public void PlayBGM(AudioClip clip, float volume = 1f)
+    public void PlayBGM(AudioClip clip, float volume = 0.5f)
     {
         bgmSource.clip = clip;
         bgmSource.volume = volume;

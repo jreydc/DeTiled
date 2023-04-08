@@ -29,6 +29,5 @@ public class Tile : ButtonBase
         tileHighlights.gameObject.SetActive(isActive);
         
         OnTileClicked.Invoke(this);
-        Debug.Log(tileAt3b.tileID+"-"+tileAt3b.tilePosition);
     }
 }
