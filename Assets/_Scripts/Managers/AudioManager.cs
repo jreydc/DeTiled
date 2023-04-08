@@ -7,18 +7,6 @@ public class AudioManager : PersistentSingleton<AudioManager>
     [SerializeField]private AudioSource bgmSource; // Reference to the audio source for background music
     [SerializeField]private AudioSource sfxSource; // Reference to the audio source for sound effects
 
-    // Play sound effect
-    public void PlaySFX(AudioClip clip, float volume = 1f)
-    {
-        sfxSource.PlayOneShot(clip, volume);
-    }
-
-    // Adjust sound effects volume
-    public void SetSFXVolume(float volume)
-    {
-        sfxSource.volume = volume;
-    }
-
     // Play background music
     public void PlayBGM(AudioClip clip, float volume = 1f)
     {
@@ -50,6 +38,18 @@ public class AudioManager : PersistentSingleton<AudioManager>
     public void SetBGMVolume(float volume)
     {
         bgmSource.volume = volume;
+    }
+
+    // Play sound effect
+    public void PlaySFX(AudioClip clip, float volume = 1f)
+    {
+        sfxSource.PlayOneShot(clip, volume);
+    }
+
+    // Adjust sound effects volume
+    public void SetSFXVolume(float volume)
+    {
+        sfxSource.volume = volume;
     }
 }
 

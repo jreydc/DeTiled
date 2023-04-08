@@ -22,18 +22,14 @@ public class InteractionManager : Singleton<InteractionManager>
         _selectedTiles[index] = _selected;
                 
         if(index > 0){
-            /* foreach(var item in _selectedTiles){
-                if(_selected.tileAt3b.tileID == item.tileAt3b.tileID){
-                    item.gameObject.SetActive(false);
-                    Debug.Log(item.tileAt3b.tileID+"-"+_selected.tileAt3b.tileID+" passed ID");
-                }
-            } */
             if(_selectedTiles[0].tileAt3b.tileID == _selected.tileAt3b.tileID){
                 _selectedTiles[0].gameObject.SetActive(false);
                 _selectedTiles[1].gameObject.SetActive(false);
+                AudioManager._Instance.PlaySFX(AudioController._Instance.SFXClips[2]);
             }else{
                 _selectedTiles[0].tileHighlights.gameObject.SetActive(false);
                 _selectedTiles[1].tileHighlights.gameObject.SetActive(false);
+                AudioManager._Instance.PlaySFX(AudioController._Instance.SFXClips[3]);
             }
             Array.Clear(_selectedTiles, 0, _selectedTiles.Length);
         }
