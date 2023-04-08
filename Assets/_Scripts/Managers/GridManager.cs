@@ -22,7 +22,6 @@ public class GridManager : MonoBehaviour
     }
 
     public void GenerateGrid(){
-        
         _tiles = new Tile[_width, _height];
         for(int x = 0; x < _width; x++){
             for(int y = 0; y < _height; y++){
@@ -40,5 +39,4 @@ public class GridManager : MonoBehaviour
         }
         _camera.transform.position = new Vector3((float)(Screen.width / 2),(float)(Screen.height / 2) , _camera.transform.position.z);
     }
-
 }

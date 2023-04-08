@@ -12,7 +12,5 @@ public abstract class ButtonBase : MonoBehaviour
         });
     }
 
-    protected virtual void ButtonEventCalling(){
-        Debug.Log(_button.name + "clicked!");
-    }
+    protected virtual void ButtonEventCalling() => AudioManager._Instance.PlaySFX(AudioController._Instance.SFXClips[0]);
 }

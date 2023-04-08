@@ -4,5 +4,6 @@
     {
         base.ButtonEventCalling();
         SceneController._Instance.LoadLevel("GameScene");
+        GameManager._Instance.ChangeState(GameState.GAME);
     }
 }

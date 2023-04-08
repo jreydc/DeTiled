@@ -4,11 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : Singleton<SceneController>
 {
-
     public void UnloadLevel(string levelName) => SceneManager.UnloadSceneAsync(levelName, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
-
     public void LoadLevel(string levelName) => StartCoroutine(LoadingDetails(levelName));
-
     public Scene GetCurrentScene(){
         return SceneManager.GetActiveScene();
     }
@@ -40,7 +37,6 @@ public class SceneController : Singleton<SceneController>
                 asyncOperation.allowSceneActivation = true;
 
             }
-
             yield return null;
         }
     }

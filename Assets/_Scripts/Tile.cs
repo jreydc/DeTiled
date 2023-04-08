@@ -23,7 +23,8 @@ public class Tile : ButtonBase
 
     protected override void ButtonEventCalling()
     {
-        base.ButtonEventCalling();
+        //base.ButtonEventCalling();
+        AudioManager._Instance.PlaySFX(AudioController._Instance.SFXClips[1]);
         isActive = isActive == false ? true : false;
         tileHighlights.gameObject.SetActive(isActive);
         

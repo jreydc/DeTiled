@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class GameManager : Singleton<GameManager>
+public class GameManager : PersistentSingleton<GameManager>
 {
     public static event Action<GameState> OnBeforeStateChanged;
     public static event Action<GameState> OnAfterStateChanged;
@@ -27,6 +27,7 @@ public class GameManager : Singleton<GameManager>
                 HandlePreGame();                
                 break;
             case GameState.GAME:
+                HandleGame();
                 break;
             case GameState.POSTGAME:
                 break;
@@ -41,14 +42,21 @@ public class GameManager : Singleton<GameManager>
 
     private void HandleStarting() {
         // Do some start setup, could be rendering environment, cinematics etc
-
+        
         // Eventually call ChangeState again with your next state
         ChangeState(GameState.PREGAME);
     }
-
-    private void HandlePreGame() => ChangeState(GameState.GAME);
+    private void HandlePreGame(){
+        // Do some extra loading and rendering of UI, FX and such.
+        AudioManager._Instance.PlayBGM(AudioController._Instance.BGMSource[0]);
+    }
 
     private void HandleGame(){
+        AudioManager._Instance.StopBGM();
+        AudioManager._Instance.PlayBGM(AudioController._Instance.BGMSource[1]);
+        //ChangeState(GameState.POSTGAME);
+    }
+    private void HandlePostGame(){
         ChangeState(GameState.POSTGAME);
     }
 
