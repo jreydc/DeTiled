@@ -14,22 +14,21 @@ public class GridManager : MonoBehaviour
     [SerializeField] private Tile _tilePrefab;
     [SerializeField] private Tile[,] _tiles;
     [SerializeField] private Sprite[] _sprite;
-
-    private int _tileActive;
     #endregion
 
     private void Start() {
+        _tiles = new Tile[_width, _height];
         GenerateGrid();
-        _tileActive = 0;
     }
 
     public void GenerateGrid(){
-        _tiles = new Tile[_width, _height];
+        
         for(int x = 0; x < _width; x++){
             for(int y = 0; y < _height; y++){
                 var spawnedTile = Instantiate(_tilePrefab, new Vector2(x,y), Quaternion.identity);
                 spawnedTile.name = $"Tile{x}{y}";
                 _tiles[x,y] = spawnedTile;
+                _tiles[x,y].tileAt3b.isActive = true;
                 spawnedTile.transform.SetParent(_canvasTrans);
                 spawnedTile.GetComponent<RectTransform>().anchoredPosition = new Vector2(x * _tileSize.x, y * _tileSize.y);
                 int id = Random.Range(0, 5);
@@ -40,13 +39,6 @@ public class GridManager : MonoBehaviour
             }
         }
         _camera.transform.position = new Vector3((float)(Screen.width / 2),(float)(Screen.height / 2) , _camera.transform.position.z);
+        InteractionManager._Instance.Init(_tiles);
     }
-
-/*     public bool TileChecker(){
-        foreach(var item in _tiles){
-            if(item.tileAt3b.isActive = false){
-                _tileActive += 1;
-            }
-        }
-    } */
 }
