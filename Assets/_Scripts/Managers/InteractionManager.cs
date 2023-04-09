@@ -16,7 +16,7 @@ public class InteractionManager : Singleton<InteractionManager>
 
     [SerializeField] private Tile[] _selectedTiles;// Selected Tiles
     [SerializeField] private Tile[,] _tiles;//Spawned Tiles
-    private int _tileActive;
+    private int _tileSpawned, _tileActive;
     private bool isGameOver;
     private void Start()
     {
@@ -27,7 +27,7 @@ public class InteractionManager : Singleton<InteractionManager>
 
     public void Init(Tile[,] _tiles){
         this._tiles = _tiles;
-        _tileActive = this._tiles.Length;
+        _tileSpawned = this._tiles.Length;
     }
 
     private void OnDestroy() {
@@ -45,7 +45,7 @@ public class InteractionManager : Singleton<InteractionManager>
             {
                 OnCorrectInteraction.Invoke();
                 DeactivateTileObjects(_selectedTiles[0], _selectedTiles[1]);
-                //TileActiveChecker();
+                TileActiveChecker();
                 AudioManager._Instance.PlaySFX(AudioController._Instance.SFXClips[2]);
             }
             else
@@ -73,17 +73,16 @@ public class InteractionManager : Singleton<InteractionManager>
         tile2.tileHighlights.gameObject.SetActive(false);
     }
 
-    /* public void TileActiveChecker(){
-        bool allDeactivated = true;
+    public void TileActiveChecker(){
+        int tileInActive = 0;
         foreach(var item in _tiles){
-            if(item.tileAt3b.isActive is false) allDeactivated = item.tileAt3b.isActive;
+            if(item.tileAt3b.isActive is false) tileInActive+=1;
         }
-        if(_tileActive <= 0 && allDeactivated) isGameOver = true;
-        _tileActive -= 2;
+        _tileActive = _tiles.Length - tileInActive;
         Debug.Log(_tileActive);
-        if (isGameOver){
-            OnAllTileIsDisabled.Invoke();//Raise an event for Game Over
+        if (_tileActive is 0){
+            OnAllTileIsDisabled?.Invoke();//Raise an event for Game Over
             Debug.Log("GameOver");
         }
-    } */
+    }
 }
